@@ -17,7 +17,7 @@ final class BlackNoirCarouselItem: CarouselItem {
         // If not, create new view controller
         // else return the existing view controller
         guard let viewController = viewController else {
-            viewController = ImageViewController(imageName: "black_noir")
+            viewController = ImageViewController(imageName: "hughei")
             return viewController!
         }
         return viewController

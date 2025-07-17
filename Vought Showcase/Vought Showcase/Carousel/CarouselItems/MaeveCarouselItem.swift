@@ -18,7 +18,7 @@ final class MaeveCarouselItem: CarouselItem {
         // If not, create new view controller
         // else return the existing view controller
         guard let viewController = viewController else {
-            viewController = ImageViewController(imageName: "maeve")
+            viewController = ImageViewController(imageName: "frenchie")
             return viewController!
         }
         return viewController

@@ -17,7 +17,7 @@ final class ATrainCarouselItem: CarouselItem {
         // If not, create new view controller
         // else return the existing view controller
         guard let viewController = viewController else {
-            viewController = ImageViewController(imageName: "a_train")
+            viewController = ImageViewController(imageName: "mm")
             return viewController!
         }
         return viewController

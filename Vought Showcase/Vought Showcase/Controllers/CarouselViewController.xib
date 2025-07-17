@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarouselViewController" customModule="Vought_Showcase" customModuleProvider="target">
+            <connections>
+                <outlet property="carouselControl" destination="b6d-dM-0f0" id="UTK-LX-L4L"/>
+                <outlet property="containerView" destination="Wdt-ua-dbL" id="3fd-pe-WiW"/>
+                <outlet property="view" destination="5XN-sE-Tx1" id="DIX-hk-WsU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5XN-sE-Tx1">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="Wdt-ua-dbL" userLabel="containerView">
+                    <rect key="frame" x="0.0" y="55.666666666666686" width="393" height="740.66666666666652"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="b6d-dM-0f0">
+                    <rect key="frame" x="0.0" y="792.33333333333337" width="393" height="25.666666666666629"/>
+                </pageControl>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="2Hc-cG-HM8"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Wdt-ua-dbL" firstAttribute="centerY" secondItem="5XN-sE-Tx1" secondAttribute="centerY" id="MT8-AA-59z"/>
+                <constraint firstItem="2Hc-cG-HM8" firstAttribute="bottom" secondItem="b6d-dM-0f0" secondAttribute="bottom" id="Oxp-yg-jtw"/>
+                <constraint firstItem="Wdt-ua-dbL" firstAttribute="bottom" secondItem="b6d-dM-0f0" secondAttribute="top" constant="4" id="TbU-ju-fiV"/>
+                <constraint firstItem="Wdt-ua-dbL" firstAttribute="leading" secondItem="2Hc-cG-HM8" secondAttribute="leading" id="YaR-nC-vHc"/>
+                <constraint firstItem="Wdt-ua-dbL" firstAttribute="trailing" secondItem="2Hc-cG-HM8" secondAttribute="trailing" id="lR9-7d-BKu"/>
+                <constraint firstItem="b6d-dM-0f0" firstAttribute="leading" secondItem="2Hc-cG-HM8" secondAttribute="leading" id="mtb-UF-pZu"/>
+                <constraint firstItem="b6d-dM-0f0" firstAttribute="trailing" secondItem="2Hc-cG-HM8" secondAttribute="trailing" id="pnV-VK-lmB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="15" y="20"/>
+        </view>
+    </objects>
+</document>

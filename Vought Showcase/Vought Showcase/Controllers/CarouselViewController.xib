@@ -9,8 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarouselViewController" customModule="Vought_Showcase" customModuleProvider="target">
             <connections>
-                <outlet property="carouselControl" destination="b6d-dM-0f0" id="UTK-LX-L4L"/>
                 <outlet property="containerView" destination="Wdt-ua-dbL" id="3fd-pe-WiW"/>
+                <outlet property="segmentedProgressBar" destination="5a4-MZ-hl9" id="40y-uV-DqI"/>
                 <outlet property="view" destination="5XN-sE-Tx1" id="DIX-hk-WsU"/>
             </connections>
         </placeholder>
@@ -23,23 +23,28 @@
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="b6d-dM-0f0">
-                    <rect key="frame" x="0.0" y="758.33333333333337" width="393" height="25.666666666666629"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </pageControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5a4-MZ-hl9" customClass="SegmentedProgressBar" customModule="Vought_Showcase" customModuleProvider="target">
+                    <rect key="frame" x="8" y="126" width="393" height="4"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="4" id="bXm-OR-GXf"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="2Hc-cG-HM8"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Wdt-ua-dbL" firstAttribute="height" secondItem="5XN-sE-Tx1" secondAttribute="height" id="2ID-Sy-bSI"/>
                 <constraint firstItem="Wdt-ua-dbL" firstAttribute="width" secondItem="5XN-sE-Tx1" secondAttribute="width" id="9r4-lV-S85"/>
                 <constraint firstAttribute="trailing" secondItem="Wdt-ua-dbL" secondAttribute="trailing" id="Hya-QF-5RN"/>
+                <constraint firstItem="5a4-MZ-hl9" firstAttribute="top" secondItem="2Hc-cG-HM8" secondAttribute="top" constant="8" id="JX3-Zq-bhh"/>
+                <constraint firstItem="5a4-MZ-hl9" firstAttribute="leading" secondItem="2Hc-cG-HM8" secondAttribute="leading" constant="8" id="Nmx-MV-7tm"/>
                 <constraint firstAttribute="bottom" secondItem="Wdt-ua-dbL" secondAttribute="bottom" id="hQk-CJ-mkq"/>
+                <constraint firstItem="2Hc-cG-HM8" firstAttribute="trailing" secondItem="5a4-MZ-hl9" secondAttribute="trailing" constant="-8" id="kYs-29-uXN"/>
                 <constraint firstItem="Wdt-ua-dbL" firstAttribute="leading" secondItem="5XN-sE-Tx1" secondAttribute="leading" id="psb-WM-THz"/>
-                <constraint firstItem="Wdt-ua-dbL" firstAttribute="top" secondItem="5XN-sE-Tx1" secondAttribute="top" id="sVf-Ce-OI9"/>
+                <constraint firstItem="Wdt-ua-dbL" firstAttribute="top" secondItem="5XN-sE-Tx1" secondAttribute="top" id="suI-Q0-jHW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="15" y="20"/>
+            <point key="canvasLocation" x="14.503816793893129" y="19.718309859154932"/>
         </view>
     </objects>
 </document>

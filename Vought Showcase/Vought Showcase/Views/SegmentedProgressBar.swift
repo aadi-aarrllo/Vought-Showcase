@@ -75,21 +75,28 @@ class SegmentedProgressBar: UIView {
     ///   - duration: The duration of each segment's animation. Defaults to 5.0 seconds.
     init(numberOfSegments: Int, duration: TimeInterval = 5.0) {
         self.duration = duration
-        super.init(frame: CGRect.zero)
-        
-        for _ in 0..<numberOfSegments {
-            let segment = Segment()
-            addSubview(segment.bottomSegmentView)
-            addSubview(segment.topSegmentView)
-            segments.append(segment)
-        }
-        self.updateColors()
+        super.init(frame: .zero)
+//
+//        for _ in 0..<numberOfSegments {
+//            let segment = Segment()
+//            addSubview(segment.bottomSegmentView)
+//            addSubview(segment.topSegmentView)
+//            segments.append(segment)
+//        }
+//        self.updateColors()
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+        setupSegments(numberOfSegments)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    required init?(coder: NSCoder) {
+        self.duration = 5.0
+        super.init(coder: coder)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         if hasDoneLayout {
@@ -99,9 +106,8 @@ class SegmentedProgressBar: UIView {
         for (index, segment) in segments.enumerated() {
             let segFrame = CGRect(x: CGFloat(index) * (width + padding), y: 0, width: width, height: frame.height)
             segment.bottomSegmentView.frame = segFrame
-            segment.topSegmentView.frame = segFrame
-            segment.topSegmentView.frame.size.width = 0
-            
+            segment.topSegmentView.frame = CGRect(x: segFrame.minX, y: segFrame.minY, width: 0, height: segFrame.height)
+
             let cr = frame.height / 2
             segment.bottomSegmentView.layer.cornerRadius = cr
             segment.topSegmentView.layer.cornerRadius = cr
@@ -111,21 +117,22 @@ class SegmentedProgressBar: UIView {
     
     /// Starts the progress bar animation.
     func startAnimation() {
+        guard !segments.isEmpty else { return }
         layoutSubviews()
-        animate()
+        animate(animationIndex: currentAnimationIndex)
     }
     
     private func animate(animationIndex: Int = 0) {
-        let nextSegment = segments[animationIndex]
+        guard !segments.isEmpty else { return }
         currentAnimationIndex = animationIndex
-        self.isPaused = false
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: {
-            nextSegment.topSegmentView.frame.size.width = nextSegment.bottomSegmentView.frame.width
-        }) { (finished) in
-            if !finished {
-                return
+        let segment = segments[animationIndex]
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear) {
+            segment.topSegmentView.frame.size.width = segment.bottomSegmentView.frame.width
+        } completion: { finished in
+            if finished {
+                self.next()
             }
-            self.next()
         }
     }
     
@@ -148,22 +155,51 @@ class SegmentedProgressBar: UIView {
     
     /// Skips the current segment and moves to the next one.
     func skip() {
-        let currentSegment = segments[currentAnimationIndex]
-        currentSegment.topSegmentView.frame.size.width = currentSegment.bottomSegmentView.frame.width
-        currentSegment.topSegmentView.layer.removeAllAnimations()
-        self.next()
+        guard !segments.isEmpty else { return }
+        let segment = segments[currentAnimationIndex]
+        segment.topSegmentView.layer.removeAllAnimations()
+        segment.topSegmentView.frame.size.width = segment.bottomSegmentView.frame.width
+        next()
     }
-    
-    /// Rewinds to the previous segment.
-    func rewind() {
-        let currentSegment = segments[currentAnimationIndex]
-        currentSegment.topSegmentView.layer.removeAllAnimations()
-        currentSegment.topSegmentView.frame.size.width = 0
-        let newIndex = max(currentAnimationIndex - 1, 0)
-        let prevSegment = segments[newIndex]
-        prevSegment.topSegmentView.frame.size.width = 0
-        self.animate(animationIndex: newIndex)
-        self.delegate?.segmentedProgressBarChangedIndex(index: newIndex)
+
+    func setSegment(to index: Int, silent: Bool = false) {
+        guard index >= 0, index < segments.count else { return }
+        segments.forEach { $0.topSegmentView.layer.removeAllAnimations() }
+        for (i, segment) in segments.enumerated() {
+            segment.topSegmentView.frame.size.width = i < index ? segment.bottomSegmentView.frame.width : 0
+        }
+        currentAnimationIndex = index
+        if !silent { delegate?.segmentedProgressBarChangedIndex(index: index) }
+    }
+
+    func rewind(silent: Bool = false) {
+        guard !segments.isEmpty else { return }
+        segments.forEach {
+            $0.topSegmentView.layer.removeAllAnimations()
+            $0.topSegmentView.frame.size.width = 0
+        }
+        currentAnimationIndex = 0
+        if !silent { delegate?.segmentedProgressBarChangedIndex(index: 0) }
+    }
+
+    func configure(numberOfSegments: Int) {
+        segments.forEach {
+            $0.bottomSegmentView.removeFromSuperview()
+            $0.topSegmentView.removeFromSuperview()
+        }
+        setupSegments(numberOfSegments)
+        hasDoneLayout = false
+        updateColors()
+    }
+
+    private func setupSegments(_ count: Int) {
+        segments.removeAll()
+        for _ in 0..<count {
+            let segment = Segment()
+            addSubview(segment.bottomSegmentView)
+            addSubview(segment.topSegmentView)
+            segments.append(segment)
+        }
     }
 }
 
